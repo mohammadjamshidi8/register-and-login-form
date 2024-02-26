@@ -12,9 +12,14 @@ module.exports = {
       colors: {
         'primary' : '#4461F2',
         'secondary' : '#ACADAC',
+        'danger': '#f24444',
+        'input-bg': '#EAF0F7',
       },
       fontFamily: {
         ubuntu : ['Ubuntu'],
+      },
+      boxShadow: {
+        'btn': '0 3px 16px -10px rgba(0, 0, 0, 0.8)'
       }
     },
   },

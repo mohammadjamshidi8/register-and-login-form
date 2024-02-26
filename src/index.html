@@ -1,18 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="output.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="output.css" />
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-straight/css/uicons-regular-straight.css"
+    />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
+    <!-- body container start -->
+    <section
+      class="w-full h-screen flex justify-center items-center font-ubuntu"
+    >
+      <!-- container with gradient start -->
+      <div
+        class="max-w-[1400px] bg-gradient-to-bl from-white via-white to-[#FFEFBA] flex flex-col gap-x-3 h-auto shadow-md rounded-md p-5"
+      >
+        <!-- navbar section start -->
+        <div class="w-full flex justify-between items-center px-5 gap-x-10">
+          <div class="flex items-center">
+            <span class="text-xl font-bold"
+              >Karlancer<span class="font-bold text-3xl text-primary"
+                >.</span
+              ></span
+            >
+          </div>
+          <!-- register and login button start -->
+          <div class="flex justify-between items-center gap-x-4 font-bold">
+            <button>Sign in</button>
+            <button
+              class="px-10 py-4 text-primary font-bold shadow-btn rounded-full"
+            >
+              Register
+            </button>
+          </div>
+          <!-- register and login button ends -->
+        </div>
+        <!-- navbar section ends -->
 
-    <section class="w-">
+        <!-- content form section start -->
+        <div class="w-full mt-10 flex justify-evenly">
+          <!-- text and color circle section start -->
+          <div class="lg:w-1/3 hidden bg-rose-400 lg:flex flex-col">
+            <h1 class="text-5xl">Sign In to Recharge Direct</h1>
+            <span class="font-bold">
+              if you don’t an account you can
+              <a class="text-primary" href="#">Register here!</a>
+            </span>
+          </div>
+          <!-- text and color circle section ends -->
+          <div class="lg:w-1/3 bg-emerald-400">
+            <img src="../images/Picture.png" alt="" />
+          </div>
+          <div class="lg:w-1/3 flex justify-center items-center">
+            <div
+              class="w-9/12 flex flex-col gap-y-6 justify-center items-center"
+            >
+              <!-- email input start -->
+              <div class="w-full flex justify-center relative">
+                <input
+                  type="email"
+                  name="sign-in-email"
+                  id="sign-in-email"
+                  placeholder="Enter Email"
+                  class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none bg-sky-100 focus:shadow-lg transition duration-300"
+                />
+                <lord-icon
+                  src="https://cdn.lordicon.com/usownftb.json"
+                  class="absolute top-1/2 -translate-y-1/2 right-3 w-[40px] h-[40px]"
+                  trigger="in"
+                  colors="primary:#acadac,secondary:#f24444"
+                >
+                </lord-icon>
+                <lord-icon
+                  src="https://cdn.lordicon.com/cgzlioyf.json"
+                  trigger="in"
+                  class="absolute top-1/2 -translate-y-1/2 right-3 w-[40px] h-[40px] hidden"
+                  colors="primary:#16c72e"
+                >
+                </lord-icon>
+              </div>
+              <!-- email input ends -->
 
+              <!-- password input starts -->
+              <div class="w-full flex justify-center relative">
+                <input
+                  type="password"
+                  name="sign-in-pass"
+                  id="sign-in-pass"
+                  class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none bg-sky-100 focus:shadow-lg transition duration-300"
+                  placeholder="Enter Password"
+                />
+                <lord-icon
+                  src="https://cdn.lordicon.com/vfczflna.json"
+                  trigger="in"
+                  stroke="bold"
+                  class="absolute top-1/2 -translate-y-1/2 right-3 w-[30px] h-[30px] cursor-pointer hidden"
+                  colors="primary:#acacac,secondary:#000"
+                >
+                </lord-icon>
+                <lord-icon
+                  src="https://cdn.lordicon.com/khheayfj.json"
+                  trigger="in"
+                  class="absolute top-1/2 -translate-y-1/2 right-3 w-[30px] h-[30px] cursor-pointer"
+                  stroke="bold"
+                  colors="primary:#121331,secondary:#acacac"
+                >
+                </lord-icon>
+              </div>
+              <!-- password input ends -->
+
+              <!-- remember and forgot password container start -->
+              <div class="w-full flex justify-between text-secondary">
+                <div class="flex gap-x-2">
+                  <input
+                    type="checkbox"
+                    name="sign-in-checkbox"
+                    id="sign-in-checkbox"
+                  />
+                  <span>Remember me</span>
+                </div>
+                <a class="transition duration-150 hover:text-black" href="#"
+                  >forgot password?</a
+                >
+              </div>
+              <!-- remember and forgot password container ends -->
+
+              <!-- sign in button form start -->
+              <button
+                class="bg-primary w-full py-4 rounded-md shadow-btn text-white font-bold"
+              >
+                Sign in
+              </button>
+              <!-- sign in button form ends -->
+            </div>
+          </div>
+        </div>
+        <!-- content form section ends -->
+      </div>
+      <!-- container with gradient ends -->
     </section>
-
+    <!-- body container ends -->
 
     <script type="module" src="../Js/app.js"></script>
-</body>
+  </body>
 </html>

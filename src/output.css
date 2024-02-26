@@ -546,28 +546,4 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.flex{
-  display: flex;
-}
-
-.h-screen{
-  height: 100vh;
-}
-
-.w-full{
-  width: 100%;
-}
-
-.items-center{
-  align-items: center;
-}
-
-.justify-center{
-  justify-content: center;
-}
-
-.font-ubuntu{
-  font-family: Ubuntu;
-}
-
 

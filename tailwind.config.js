@@ -8,6 +8,7 @@ module.exports = {
         'secondary' : '#ACADAC',
         'danger': '#f24444',
         'input-bg': '#EAF0F7',
+        'succes': 'rgb(110,231,183)',
       },
       fontFamily: {
         ubuntu : ['Ubuntu'],

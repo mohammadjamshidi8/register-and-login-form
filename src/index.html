@@ -30,9 +30,7 @@
             >
           </div>
           <!-- register and login button start -->
-          <div
-            class="flex justify-between items-center gap-x-8 font-bold"
-          >
+          <div class="flex justify-between items-center gap-x-8 font-bold">
             <button class="hidden md:inline">Sign in</button>
             <button
               class="px-10 py-4 text-primary font-bold transition duration-200 bg-[rgba(255,255,255,.5)] hover:bg-white shadow-btn rounded-full"
@@ -49,15 +47,23 @@
           class="w-full mt-10 flex gap-x-5 gap-y-10 md:px-10 flex-col md:flex-row justify-between"
         >
           <!-- text and color circle section start -->
-          <div class="relative w-1/3 hidden lg:flex flex-col items-start justify-start gap-y-10 mt-10 z-10">
+          <div
+            class="relative w-1/3 hidden lg:flex flex-col items-start justify-start gap-y-10 mt-10 z-10"
+          >
             <h1 class="text-6xl font-bold">Sign In to Recharge Direct</h1>
             <span class="font-bold">
               if you don’t an account you can
               <a class="text-blue-800" href="#">Register here!</a>
             </span>
-            <div class="absolute bottom-20 right-16 bg-blue-400 w-36 h-36 blur-3xl rounded-full opacity-80" ></div>
-            <div class="absolute top-0 left-16 bg-yellow-200 w-36 h-36 blur-3xl rounded-full opacity-50 -z-10" ></div>
-            <div class="absolute bottom-12 left-16 bg-emerald-400 w-36 h-36 blur-3xl rounded-full opacity-50 " ></div>
+            <div
+              class="absolute bottom-20 right-16 bg-blue-400 w-36 h-36 blur-3xl rounded-full opacity-80"
+            ></div>
+            <div
+              class="absolute top-0 left-16 bg-yellow-200 w-36 h-36 blur-3xl rounded-full opacity-50 -z-10"
+            ></div>
+            <div
+              class="absolute bottom-12 left-16 bg-emerald-400 w-36 h-36 blur-3xl rounded-full opacity-50"
+            ></div>
           </div>
           <!-- text and color circle section ends -->
 
@@ -69,9 +75,7 @@
 
           <!-- inputs section start -->
           <div class="md:w-1/2 lg:w-1/3 flex justify-center items-center">
-            <div
-              class="w-full md:w-11/12 flex flex-col gap-y-10 items-center"
-            >
+            <div class="w-full md:w-11/12 flex flex-col gap-y-10 items-center">
               <!-- email input start -->
               <div class="w-full flex justify-center relative">
                 <input
@@ -79,10 +83,12 @@
                   name="sign-in-email"
                   id="sign-in-email"
                   placeholder="Enter Email"
-                  class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none bg-sky-100 focus:bg-white focus:shadow-lg transition duration-300"
+                  class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none bg-sky-100 focus:shadow-lg transition duration-300"
                 />
                 <lord-icon
                   src="https://cdn.lordicon.com/usownftb.json"
+                  id="sign-in-email-error"
+                  data-state="danger"
                   class="absolute top-1/2 -translate-y-1/2 right-3 w-[40px] h-[40px]"
                   trigger=""
                   colors="primary:#acadac,secondary:#f24444"
@@ -91,6 +97,8 @@
                 <lord-icon
                   src="https://cdn.lordicon.com/cgzlioyf.json"
                   trigger=""
+                  data-state="succes"
+                  id="sign-in-email-succes"
                   class="absolute top-1/2 -translate-y-1/2 right-3 w-[40px] h-[40px] hidden"
                   colors="primary:#16c72e"
                 >
@@ -104,12 +112,15 @@
                   type="password"
                   name="sign-in-pass"
                   id="sign-in-pass"
-                  class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none bg-sky-100 focus:bg-white  focus:shadow-lg transition duration-300"
+                  minlength="4"
+                  maxlength="10"
+                  class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none bg-sky-100 focus:bg-white] focus:shadow-lg transition duration-300"
                   placeholder="Enter Password"
                 />
                 <lord-icon
                   src="https://cdn.lordicon.com/vfczflna.json"
                   trigger=""
+                  data-state="succes"
                   stroke="bold"
                   class="absolute top-1/2 -translate-y-1/2 right-3 w-[30px] h-[30px] cursor-pointer hidden"
                   colors="primary:#acacac,secondary:#000"
@@ -118,6 +129,7 @@
                 <lord-icon
                   src="https://cdn.lordicon.com/khheayfj.json"
                   trigger=""
+                  data-state="danger"
                   class="absolute top-1/2 -translate-y-1/2 right-3 w-[30px] h-[30px] cursor-pointer"
                   stroke="bold"
                   colors="primary:#121331,secondary:#acacac"
@@ -153,7 +165,6 @@
             </div>
           </div>
           <!-- inputs section ends -->
-
         </div>
         <!-- content form section ends -->
       </div>

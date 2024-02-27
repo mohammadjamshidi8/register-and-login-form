@@ -13,31 +13,41 @@
   </head>
 
 
-  <body>
+  <body class="light">
     <!-- body container start -->
     <section
-      class="w-full h-screen flex justify-center items-center bg-sky-300 font-ubuntu"
+      class="w-full h-screen flex justify-center items-center dark:bg-green-900 bg-sky-300 font-ubuntu"
     >
       <!-- container with gradient start -->
       <div
         class="max-w-auto md:mx-6 py-10 h-full flex flex-col items-center pb-24 gap-y-12 md:h-auto shadow-md bg-[rgba(255,255,255,.2)] border-[2px] rounded-lg p-5"
       >
         <!-- navbar section start -->
-        <div class="w-full flex justify-between items-center md:px-14 gap-x-10">
+        <div class="w-full h-max flex justify-between items-center md:px-14 gap-x-10">
           <div class="flex items-center">
-            <span class="text-xl font-bold"
+            <span class="text-md md:text-xl font-bold"
               >Karlancer<span class="font-bold text-3xl text-primary"
                 >.</span
               ></span
             >
           </div>
           <!-- register and login button start -->
-          <div class="flex justify-between items-center md:gap-x-8 gap-x-4 font-bold">
-            <button id="login-btn" class="md:text-md text-sm">Sign in</button>
+          <div class="flex justify-between items-center md:gap-x-8 gap-x-2 font-bold">
+            <button id="login-btn" class="md:text-lg text-sm">Sign in</button>
             <button id="register-btn"
-              class="text-sm md:text-md md:px-10 md:py-4 py-2 px-6 text-primary font-bold transition duration-200 bg-[rgba(255,255,255,.5)] hover:bg-white shadow-btn rounded-full"
+              class="text-sm md:text-lg md:px-10 md:py-4 py-2 px-6 text-primary font-bold transition duration-200 bg-[rgba(255,255,255,.5)] hover:bg-white shadow-btn rounded-full"
             >
               Register
+            </button>
+            <button id="switch-theme" class="w-7 h-7 p-1 border-2 flex justify-center items-center rounded-full">
+              <svg id="dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="black" class="w-5 h-5">
+                <path fill-rule="evenodd" d="M7.455 2.004a.75.75 0 0 1 .26.77 7 7 0 0 0 9.958 7.967.75.75 0 0 1 1.067.853A8.5 8.5 0 1 1 6.647 1.921a.75.75 0 0 1 .808.083Z" clip-rule="evenodd" />
+              </svg>              
+              
+              <svg id="light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="" class="w-5 h-5 hidden">
+                <path d="M10 2a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 10 2ZM10 15a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 10 15ZM10 7a3 3 0 1 0 0 6 3 3 0 0 0 0-6ZM15.657 5.404a.75.75 0 1 0-1.06-1.06l-1.061 1.06a.75.75 0 0 0 1.06 1.06l1.06-1.06ZM6.464 14.596a.75.75 0 1 0-1.06-1.06l-1.06 1.06a.75.75 0 0 0 1.06 1.06l1.06-1.06ZM18 10a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 18 10ZM5 10a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 5 10ZM14.596 15.657a.75.75 0 0 0 1.06-1.06l-1.06-1.061a.75.75 0 1 0-1.06 1.06l1.06 1.06ZM5.404 6.464a.75.75 0 0 0 1.06-1.06l-1.06-1.06a.75.75 0 1 0-1.061 1.06l1.06 1.06Z" />
+              </svg>
+              
             </button>
           </div>
           <!-- register and login button ends -->
@@ -170,9 +180,9 @@
                     id="sign-in-checkbox"
                     class="appearance-none w-3 h-3 bg-white rounded-full checked:bg-primary"
                   />
-                  <label for="sign-in-checkbox">Remember me</label>
+                  <label for="sign-in-checkbox" class="text-sm font-bold">Remember me</label>
                 </div>
-                <a class="transition duration-150 hover:text-primary" href="#"
+                <a class="transition duration-150 hover:text-primary text-sm md:font-bold" href="#"
                   >forgot password?</a
                 >
               </div>

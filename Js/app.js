@@ -4,6 +4,7 @@
 // window.customElements.define('site-form',Form)
 
 // select elements
+
 let loginEmail = document.querySelector('#sign-in-email')
 let errorIcon = null
 let succesIcon = null
@@ -19,6 +20,16 @@ let loginPassword = document.querySelector('#sign-in-pass')
 let passwordText = document.querySelector('#password-text')
 let passwordCounter = document.querySelector('#counter')
 
+let registerEmail = document.querySelector('#sign-up-email')
+
+let registerNameInput = document.querySelector('#full-name')
+
+let registerLockIcon = document.querySelector('#register-lock')
+let registerEyeIcon = document.querySelector('#register-eye')
+let registerPassword = document.querySelector('#register-pass')
+
+let registerCounterPass = document.querySelector('#register-counter')
+let registerPassText = document.querySelector('#register-password-text')
 
 // select icons and convert to Array
 
@@ -72,7 +83,9 @@ const changeBorderColor = (condition, event) => {
     }
 }
 
-// login email validation and and animate icons
+// --------------------------- login form ------------------------------ //
+
+// -------------  login email validation and and animate icons ------------- //
 
 loginEmail.addEventListener('input', (e) => {
 
@@ -83,8 +96,7 @@ loginEmail.addEventListener('input', (e) => {
     console.log(isEmailValid);
 
 })
-
-// animate error icon in login pgae on focus event
+// -------------  animate error icon in login pgae on focus event ------------- //
 
 loginEmail.addEventListener('focus', (e) => {
 
@@ -92,8 +104,7 @@ loginEmail.addEventListener('focus', (e) => {
     errorIcon[0].setAttribute('trigger', 'in')
 
 })
-
-// login page clear border on blur event
+// -------------  email login page clear border on blur event ------------- //
 
 loginEmail.addEventListener('blur', () => {
 
@@ -101,8 +112,7 @@ loginEmail.addEventListener('blur', () => {
 
 })
 
-
-// show and hide password in login page
+// -------------  show and hide password in login page ------------- //
 
 loginLockIcon.addEventListener('click', () => {
 
@@ -119,7 +129,7 @@ loginEyeIcon.addEventListener('click', () => {
 
 })
 
-// find active icon and animate and show error password text
+// -------------  find active icon and animate and show error password text ------------- //
 
 loginPassword.addEventListener('focus', (event) => {
 
@@ -135,9 +145,11 @@ loginPassword.addEventListener('focus', (event) => {
         }
     })
 
-    activeIcon[0].setAttribute('trigger','in')
+    activeIcon[0].setAttribute('trigger', 'in')
 
 })
+
+// -------------  login page password error text hide on blur ------------- //
 
 loginPassword.addEventListener('blur', () => {
 
@@ -145,9 +157,9 @@ loginPassword.addEventListener('blur', () => {
 
 })
 
-// ///////////////////////////////////////
+// -------------  login page password counter ------------- //
 
-loginPassword.addEventListener('input',(e) => {
+loginPassword.addEventListener('input', (e) => {
 
     if (e.target.value.length > 4) {
         passwordText.style.color = '#055902'
@@ -155,6 +167,124 @@ loginPassword.addEventListener('input',(e) => {
         passwordText.style.removeProperty('color')
     }
 
-    passwordCounter.innerHTML = 10 - e.target.value.length 
+    passwordCounter.innerHTML = 10 - e.target.value.length
+
+})
+
+// --------------------------- register form ------------------------------ //
+
+// -------------  register email validation and and animate icons ------------- //
+
+registerEmail.addEventListener('input', (e) => {
+
+    let isEmailValid = emailValidation.test(e.target.value)
+
+    changeBorderColor(isEmailValid, e)
+
+})
+
+// -------------  animate error icon in register page on focus event ------------- //
+
+registerEmail.addEventListener('focus', (e) => {
+
+    getIcons(e)
+    errorIcon[0].setAttribute('trigger', 'in')
+
+})
+
+// -------------  emailregister page clear border on blur event ------------- //
+
+registerEmail.addEventListener('blur', () => {
+
+    registerEmail.style.removeProperty('border')
+
+})
+
+
+// -------------  register full name validation and and animate icons ------------- //
+
+registerNameInput.addEventListener('input', (e) => {
+
+    let isFullNameValid = e.target.value.length > 3
+
+    changeBorderColor(isFullNameValid, e)
+
+})
+
+// -------------  animate error icon in full name page on focus event ------------- //
+
+registerNameInput.addEventListener('focus', (e) => {
+
+    getIcons(e)
+    errorIcon[0].setAttribute('trigger', 'in')
+
+})
+
+// -------------  register page clear border on blur event ------------- //
+
+registerNameInput.addEventListener('blur', () => {
+
+    registerNameInput.style.removeProperty('border')
+
+})
+
+
+
+// -------------  show and hide password in login page ------------- //
+
+registerLockIcon.addEventListener('click', () => {
+
+    registerLockIcon.classList.add('hidden')
+    registerEyeIcon.classList.remove('hidden')
+    registerPassword.setAttribute('type', 'text')
+
+})
+registerEyeIcon.addEventListener('click', () => {
+
+    registerEyeIcon.classList.add('hidden')
+    registerLockIcon.classList.remove('hidden')
+    registerPassword.setAttribute('type', 'password')
+
+})
+
+// -------------  find active icon and animate and show error password text ------------- //
+
+registerPassword.addEventListener('focus', (event) => {
+
+    registerPassText.classList.remove('hidden')
+
+    convertToArray(event)
+
+    let activeIcon = iconsArray.filter(icon => {
+        let iconClass = icon.getAttribute('class')
+
+        if (!iconClass.includes('hidden')) {
+            return icon
+        }
+    })
+
+    activeIcon[0].setAttribute('trigger', 'in')
+
+})
+
+// -------------  login page password error text hide on blur ------------- //
+
+registerPassword.addEventListener('blur', () => {
+
+    registerPassText.classList.add('hidden')
+
+})
+
+// -------------  login page password counter ------------- //
+
+registerPassword.addEventListener('input', (e) => {
+
+    if (e.target.value.length > 4) {
+        registerPassText.style.color = '#055902'
+    } else {
+        registerPassText.style.removeProperty('color')
+    }
+
+    registerCounterPass.innerHTML = 10 - e.target.value.length
 
 })

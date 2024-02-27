@@ -7,8 +7,12 @@
 let loginEmail = document.querySelector('#sign-in-email')
 let errorIcon = null
 let succesIcon = null
-
 const emailValidation = /^\w+([\.-]?\w)*@\w+([\.-]?\w)*(\.\w{2,3})+$/
+
+
+let loginLockIcon = document.querySelector('#login-lock')
+let loginEyeIcon = document.querySelector('#login-eye')
+let loginPassword = document.querySelector('#sign-in-pass')
 
 
 // get icons from inputs
@@ -84,3 +88,20 @@ loginEmail.addEventListener('blur', () => {
 
 })
 
+
+// show and hide password in login page
+
+loginLockIcon.addEventListener('click', () => {
+
+    loginLockIcon.classList.add('hidden')
+    loginEyeIcon.classList.remove('hidden')
+    loginPassword.setAttribute('type', 'text')
+
+})
+loginEyeIcon.addEventListener('click', () => {
+
+    loginEyeIcon.classList.add('hidden')
+    loginLockIcon.classList.remove('hidden')
+    loginPassword.setAttribute('type', 'password')
+
+})

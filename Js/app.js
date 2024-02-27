@@ -9,19 +9,32 @@ let errorIcon = null
 let succesIcon = null
 const emailValidation = /^\w+([\.-]?\w)*@\w+([\.-]?\w)*(\.\w{2,3})+$/
 
+let iconsArray = null;
+
 
 let loginLockIcon = document.querySelector('#login-lock')
 let loginEyeIcon = document.querySelector('#login-eye')
 let loginPassword = document.querySelector('#sign-in-pass')
+
+let passwordText = document.querySelector('#password-text')
+let passwordCounter = document.querySelector('#counter')
+
+
+// select icons and convert to Array
+
+const convertToArray = (event) => {
+
+    let icons = event.target.parentElement.querySelectorAll('lord-icon')
+
+    iconsArray = Array.from(icons)
+}
 
 
 // get icons from inputs
 
 const getIcons = (event) => {
 
-    let icons = event.target.parentElement.querySelectorAll('lord-icon')
-
-    let iconsArray = Array.from(icons)
+    convertToArray(event)
 
     succesIcon = iconsArray.filter(icon => {
         return icon.getAttribute('data-state') === 'succes'
@@ -103,5 +116,45 @@ loginEyeIcon.addEventListener('click', () => {
     loginEyeIcon.classList.add('hidden')
     loginLockIcon.classList.remove('hidden')
     loginPassword.setAttribute('type', 'password')
+
+})
+
+// find active icon and animate and show error password text
+
+loginPassword.addEventListener('focus', (event) => {
+
+    passwordText.classList.remove('hidden')
+
+    convertToArray(event)
+
+    let activeIcon = iconsArray.filter(icon => {
+        let iconClass = icon.getAttribute('class')
+
+        if (!iconClass.includes('hidden')) {
+            return icon
+        }
+    })
+
+    activeIcon[0].setAttribute('trigger','in')
+
+})
+
+loginPassword.addEventListener('blur', () => {
+
+    passwordText.classList.add('hidden')
+
+})
+
+// ///////////////////////////////////////
+
+loginPassword.addEventListener('input',(e) => {
+
+    if (e.target.value.length > 4) {
+        passwordText.style.color = '#055902'
+    } else {
+        passwordText.style.removeProperty('color')
+    }
+
+    passwordCounter.innerHTML = 10 - e.target.value.length 
 
 })

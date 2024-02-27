@@ -31,6 +31,16 @@ let registerPassword = document.querySelector('#register-pass')
 let registerCounterPass = document.querySelector('#register-counter')
 let registerPassText = document.querySelector('#register-password-text')
 
+let loginForm = document.querySelector('#login-form')
+let registerForm = document.querySelector('#register-form')
+
+let loginBtn = document.querySelector('#login-btn')
+let registerBtn = document.querySelector('#register-btn')
+
+let activePageClass = 'md:text-md text-sm'
+let otherPageClass = 'text-sm md:text-md md:px-10 md:py-4 py-2 px-6 text-primary font-bold transition duration-200 bg-[rgba(255,255,255,.5)] hover:bg-white shadow-btn rounded-full'
+
+
 // select icons and convert to Array
 
 const convertToArray = (event) => {
@@ -170,6 +180,30 @@ loginPassword.addEventListener('input', (e) => {
     passwordCounter.innerHTML = 10 - e.target.value.length
 
 })
+
+// --------------------------- switch between login and register form ------------------------------ //
+
+registerBtn.addEventListener('click', () => {
+
+    registerForm.classList.remove('hidden')
+    loginForm.classList.add('hidden')
+
+    loginBtn.setAttribute('class',otherPageClass)
+    registerBtn.setAttribute('class',activePageClass)
+
+})
+
+loginBtn.addEventListener('click', () => {
+
+    loginForm.classList.remove('hidden')
+    registerForm.classList.add('hidden')
+
+    registerBtn.setAttribute('class',otherPageClass)
+    loginBtn.setAttribute('class',activePageClass)
+
+})
+
+
 
 // --------------------------- register form ------------------------------ //
 

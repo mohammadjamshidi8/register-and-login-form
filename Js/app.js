@@ -38,7 +38,7 @@ let loginBtn = document.querySelector('#login-btn')
 let registerBtn = document.querySelector('#register-btn')
 
 let activePageClass = 'md:text-md text-sm'
-let otherPageClass = 'text-sm md:text-md md:px-10 md:py-4 py-2 px-6 text-primary font-bold transition duration-200 bg-[rgba(255,255,255,.5)] hover:bg-white shadow-btn rounded-full'
+let otherPageClass = 'text-sm md:text-lg md:px-10 md:py-4 py-2 px-6 text-primary dark:text-emerald-500 font-bold transition duration-200 dark:bg-white bg-[rgba(255,255,255,.5)] hover:bg-white shadow-btn rounded-full'
 
 let switchThemeBtn = document.querySelector('#switch-theme')
 let switchToLight = document.querySelector('#light')

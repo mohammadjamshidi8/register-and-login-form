@@ -1,3 +1,6 @@
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+
+
 // import { Form } from "../components/Form/form.js";
 
 
@@ -37,12 +40,28 @@ let registerForm = document.querySelector('#register-form')
 let loginBtn = document.querySelector('#login-btn')
 let registerBtn = document.querySelector('#register-btn')
 
-let activePageClass = 'md:text-md text-sm'
-let otherPageClass = 'text-sm md:text-lg md:px-10 md:py-4 py-2 px-6 text-primary dark:text-emerald-500 font-bold transition duration-200 dark:bg-white bg-[rgba(255,255,255,.5)] hover:bg-white shadow-btn rounded-full'
+let activePageClass = 'md:text-md text-sm dark:text-white'
+let otherPageClass = 'text-sm md:text-lg md:px-10 md:py-4 py-2 px-6 text-primary dark:text-emerald-500 font-bold transition duration-200 dark:bg-white bg-[rgba(255,255,255,.5)] hover:bg-white shadow-btn rounded-full dark:text-white'
 
 let switchThemeBtn = document.querySelector('#switch-theme')
 let switchToLight = document.querySelector('#light')
 let switchToDark = document.querySelector('#dark')
+
+// -------------  import supabase client ------------- //
+
+// Create a single supabase client for interacting with your database
+const supabaseUrl = 'https://umpxjdngofktrrnqcygf.supabase.co'
+
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVtcHhqZG5nb2ZrdHJybnFjeWdmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDg4Nzg5NzQsImV4cCI6MjAyNDQ1NDk3NH0.gPvrLp0-VZNLZV738E3Fe7Q621guwbAAbrFnHPMDYT0'
+
+const supabase = createClient(supabaseUrl, supabaseKey)
+
+
+
+const { data, error } = await supabase
+  .from('users_info')
+  .select()
+
 
 
 // select icons and convert to Array
@@ -350,6 +369,9 @@ switchThemeBtn.addEventListener('click', () => {
 
     }
 
-    console.log(lightClass);
 })
+
+// -------------  add data to supabase ------------- //
+
+
 

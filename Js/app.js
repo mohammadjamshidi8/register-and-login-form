@@ -41,11 +41,19 @@ let loginBtn = document.querySelector('#login-btn')
 let registerBtn = document.querySelector('#register-btn')
 
 let activePageClass = 'md:text-md text-sm dark:text-white'
-let otherPageClass = 'text-sm md:text-lg md:px-10 md:py-4 py-2 px-6 text-primary dark:text-emerald-500 font-bold transition duration-200 dark:bg-white bg-[rgba(255,255,255,.5)] hover:bg-white shadow-btn rounded-full dark:text-white'
+let otherPageClass = 'text-sm md:text-lg md:px-10 md:py-4 py-2 px-6 text-primary dark:text-emerald-500 font-bold transition duration-200 dark:bg-white bg-[rgba(255,255,255,.5)] hover:bg-white shadow-btn rounded-full dark:text-emerald-500'
 
 let switchThemeBtn = document.querySelector('#switch-theme')
 let switchToLight = document.querySelector('#light')
 let switchToDark = document.querySelector('#dark')
+
+let formRegisterBtn = document.querySelector('#register-form-btn')
+
+
+let userEmail = null
+let userName = null
+let userPassword = null
+
 
 // -------------  import supabase client ------------- //
 
@@ -59,9 +67,14 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 
 const { data, error } = await supabase
-  .from('users_info')
-  .select()
+    .from('users_info')
+    .select()
 
+// -------------  add users to supabase database ------------- //
+
+formRegisterBtn.addEventListener('click', () => {
+    console.log('true');
+})
 
 
 // select icons and convert to Array
@@ -105,6 +118,10 @@ const changeBorderColor = (condition, event) => {
 
         succesIcon[0].setAttribute('trigger', 'in')
 
+        event.target.ariaLabel = true;
+
+        console.log(event.target.ariaLabel);
+
     } else {
 
         event.target.style.border = '1px solid #f24444'
@@ -112,6 +129,8 @@ const changeBorderColor = (condition, event) => {
         errorIcon[0].classList.remove('hidden')
 
         succesIcon[0].classList.add('hidden')
+
+        event.target.ariaLabel = false;
 
     }
 }
@@ -238,6 +257,7 @@ registerEmail.addEventListener('input', (e) => {
 
     changeBorderColor(isEmailValid, e)
 
+
 })
 
 // -------------  animate error icon in register page on focus event ------------- //
@@ -357,7 +377,7 @@ switchThemeBtn.addEventListener('click', () => {
         switchToLight.classList.remove('hidden')
         switchToDark.classList.add('hidden')
 
-        document.body.setAttribute('class','dark')
+        document.body.setAttribute('class', 'dark')
         console.log('dark');
 
     } else {
@@ -365,7 +385,7 @@ switchThemeBtn.addEventListener('click', () => {
         switchToLight.classList.add('hidden')
         switchToDark.classList.remove('hidden')
 
-        document.body.setAttribute('class','light')
+        document.body.setAttribute('class', 'light')
 
     }
 
@@ -373,5 +393,59 @@ switchThemeBtn.addEventListener('click', () => {
 
 // -------------  add data to supabase ------------- //
 
+async function insertDataToSupabase(name,email,password) {
+    const { error } = await supabase
+        .from('users_info')
+        .insert({ full_name: name, email: email, password: password })
+}
+
+formRegisterBtn.addEventListener('click', (e) => {
+
+    e.preventDefault()
+
+    registerEmail.ariaLabel === true ? userEmail = registerEmail.value : console.log('false email');
+    registerNameInput.ariaLabel === true ? userName = registerNameInput.value : console.log('false name');
+    registerPassword.value.length > 4 ? userPassword = registerPassword.value : console.log('false pass');
+
+  
+
+    if (userEmail && userName && userPassword) {
+
+        async function getDataFromSupabase() {
+
+            const { data, error } = await supabase
+                .from('users_info')
+                .select()
+            let userArray = data
+
+            let isUserExist = userArray.filter(user => {
+                return user.email === userEmail
+            })
+
+            console.log(Boolean(isUserExist));
+            if (isUserExist.length > 0) {
+                alert('user is exist')
+
+            } else {
+                insertDataToSupabase(userName,userEmail,userPassword)
+            }
+
+        }
+
+        getDataFromSupabase()
 
 
+        registerEmail.value = ''
+        registerNameInput.value = ''
+        registerPassword.value = ''
+
+        registerEmail.focus()
+
+
+
+
+
+    } else {
+        console.log('check all fields');
+    }
+})

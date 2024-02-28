@@ -200,17 +200,18 @@
             <!-- sign in form ends -->
 
             <!-- sign up form start -->
-            <div id="register-form"
+            <form method="" id="register-form"
               class="w-full md:w-11/12 flex flex-col gap-y-10 items-center"
             >
               <!-- sign up email input start -->
               <div class="w-full flex justify-center relative">
                 <input
                   type="email"
+                  
                   name="sign-up-email"
                   id="sign-up-email"
                   placeholder="Enter Email"
-                  class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none bg-sky-100 focus:shadow-lg dark:bg-white transition duration-300"
+                  class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none bg-sky-100 focus:shadow-lg dark:bg-white transition duration-300" required
                 />
                 <lord-icon
                   src="https://cdn.lordicon.com/usownftb.json"
@@ -240,7 +241,7 @@
                   name="full name"
                   id="full-name"
                   placeholder="Enter Your Full Name"
-                  class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none bg-sky-100 focus:shadow-lg dark:bg-white transition duration-300"
+                  class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none bg-sky-100 focus:shadow-lg dark:bg-white transition duration-300" required
                 />
                 <lord-icon
                   src="https://cdn.lordicon.com/bgebyztw.json"
@@ -273,7 +274,7 @@
                     minlength="4"
                     maxlength="10"
                     class="w-full py-4 pr-6 pl-12 rounded-md shadow-md placeholder:font-thin font-bold outline-none dark:bg-white bg-sky-100 focus:bg-white] focus:shadow-lg transition duration-300"
-                    placeholder="Enter Password"
+                    placeholder="Enter Password" required
                   />
                   <lord-icon
                     src="https://cdn.lordicon.com/vfczflna.json"
@@ -314,13 +315,13 @@
               <!-- sign up password input ends -->
 
               <!-- sign in button form start -->
-              <button
+              <button type="submit" id="register-form-btn"
                 class="bg-primary dark:bg-emerald-500 w-full py-4 rounded-md shadow-btn text-white font-bold dark:text-darkBlue dark:hover:bg-emerald-400"
               >
-                Sign up
+                Register
               </button>
               <!-- sign in button form ends -->
-            </div>
+            </form>
 
             <!-- sign up form ends -->
           </div>

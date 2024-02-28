@@ -54,6 +54,15 @@ let userEmail = null
 let userName = null
 let userPassword = null
 
+let modal = document.querySelector('#modal')
+let modalMessage = document.querySelector('#modal-text')
+let closeModalBtn = document.querySelector('#modal-close')
+
+let errorEmailMassege = document.querySelector('#sign-up-email-error')
+let errorNameMassege = document.querySelector('#full-name-error')
+let errorPasswordMassege = document.querySelector('#register-pass-error')
+let errorMassegeClass = 'text-danger capitalize'
+
 
 // -------------  import supabase client ------------- //
 
@@ -108,6 +117,14 @@ const changeBorderColor = (condition, event) => {
 
     getIcons(event)
 
+    let test = document.querySelector(`#${event.target.id}-error`)
+
+    console.log(test);
+
+
+    // console.log(`#${event.target.id}-error`);
+
+
     if (condition) {
 
         event.target.style.border = '1px solid rgb(110,231,183)'
@@ -120,7 +137,13 @@ const changeBorderColor = (condition, event) => {
 
         event.target.ariaLabel = true;
 
-        console.log(event.target.ariaLabel);
+        let errorMassegElem = document.querySelector(`#${event.target.id}-error`)
+
+        console.log(errorMassegElem);
+
+        if (errorMassegElem.getAttribute('class') === errorMassegeClass) {
+            errorMassegElem.classList.add('hidden')
+        }
 
     } else {
 
@@ -215,6 +238,8 @@ loginPassword.addEventListener('input', (e) => {
 
     if (e.target.value.length > 4) {
         passwordText.style.color = '#055902'
+
+
     } else {
         passwordText.style.removeProperty('color')
     }
@@ -358,6 +383,12 @@ registerPassword.addEventListener('input', (e) => {
 
     if (e.target.value.length > 4) {
         registerPassText.style.color = '#055902'
+
+        if (errorPasswordMassege.getAttribute('class') === errorMassegeClass) {
+            errorPasswordMassege.classList.add('hidden')
+        }
+        
+
     } else {
         registerPassText.style.removeProperty('color')
     }
@@ -393,7 +424,7 @@ switchThemeBtn.addEventListener('click', () => {
 
 // -------------  add data to supabase ------------- //
 
-async function insertDataToSupabase(name,email,password) {
+async function insertDataToSupabase(name, email, password) {
     const { error } = await supabase
         .from('users_info')
         .insert({ full_name: name, email: email, password: password })
@@ -403,14 +434,40 @@ formRegisterBtn.addEventListener('click', (e) => {
 
     e.preventDefault()
 
-    registerEmail.ariaLabel === true ? userEmail = registerEmail.value : console.log('false email');
-    registerNameInput.ariaLabel === true ? userName = registerNameInput.value : console.log('false name');
-    registerPassword.value.length > 4 ? userPassword = registerPassword.value : console.log('false pass');
+    if (registerEmail.ariaLabel === 'true') {
 
-  
+        userEmail = registerEmail.value
 
+    } else {
+
+        errorEmailMassege.classList.remove('hidden')
+
+    }
+
+    if (registerNameInput.ariaLabel === 'true') {
+
+        userName = registerNameInput.value
+
+    } else {
+
+        errorNameMassege.classList.remove('hidden')
+
+    }
+
+    if (registerPassword.value.length > 4) {
+
+        userPassword = registerPassword.value
+
+    } else {
+
+        errorPasswordMassege.classList.remove('hidden')
+
+    }
+
+    // check all field for correct data
     if (userEmail && userName && userPassword) {
 
+        // get users for check the user doesn't exist
         async function getDataFromSupabase() {
 
             const { data, error } = await supabase
@@ -419,15 +476,30 @@ formRegisterBtn.addEventListener('click', (e) => {
             let userArray = data
 
             let isUserExist = userArray.filter(user => {
+
                 return user.email === userEmail
+
             })
-
-            console.log(Boolean(isUserExist));
+            // show modal if user existing
             if (isUserExist.length > 0) {
-                alert('user is exist')
+                // close modal with button
+                closeModalBtn.addEventListener('click', () => {
+                    modal.classList.add('hidden')
+                })
+                // show modal on duplicate email
+                modal.classList.remove('hidden')
 
+                modalMessage.innerHTML = userEmail
+
+                setTimeout(() => {
+                    modal.classList.add('hidden')
+                }, 5000);
+
+                // if user doesn't exist add to database
             } else {
-                insertDataToSupabase(userName,userEmail,userPassword)
+
+                insertDataToSupabase(userName, userEmail, userPassword)
+
             }
 
         }

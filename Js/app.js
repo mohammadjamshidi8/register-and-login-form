@@ -15,6 +15,7 @@ const emailValidation = /^\w+([\.-]?\w)*@\w+([\.-]?\w)*(\.\w{2,3})+$/
 
 let iconsArray = null;
 
+let mainContainer = document.querySelector('#main-container')
 
 let loginLockIcon = document.querySelector('#login-lock')
 let loginEyeIcon = document.querySelector('#login-eye')
@@ -73,8 +74,10 @@ let loginErrorPasswordMassege = document.querySelector('#login-pass-error')
 let dontHaveAccountModal = document.querySelector('#register-modal')
 let dontHaveAccountMassege = document.querySelector('#register-modal-text')
 
-let rememberCheckBox = document.querySelector('#sign-in-checkbox')
 let forgotPasswordElem = document.querySelector('#forgot-pass')
+
+let changePassModal = document.querySelector('#change-pass-modal')
+let changePassModalCloseBtn = document.querySelector('#change-pass-modal-close')
 
 // -------------  import supabase client ------------- //
 
@@ -639,5 +642,22 @@ formLoginBtn.addEventListener('click', (e) => {
         console.log('false');
     }
 
+
+})
+
+forgotPasswordElem.addEventListener('click', () => {
+
+    changePassModal.classList.remove('hidden')
+
+    mainContainer.classList.add('blur-md')
+
+})
+
+
+changePassModalCloseBtn.addEventListener('click', () => {
+
+    changePassModal.classList.add('hidden')
+
+    mainContainer.classList.remove('blur-md')
 
 })

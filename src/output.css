@@ -1008,6 +1008,11 @@ video {
   padding-bottom: 0.75rem;
 }
 
+.px-4{
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 .pb-24{
   padding-bottom: 6rem;
 }
@@ -1022,6 +1027,10 @@ video {
 
 .pr-6{
   padding-right: 1.5rem;
+}
+
+.text-center{
+  text-align: center;
 }
 
 .font-ubuntu{
@@ -1084,6 +1093,11 @@ video {
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-emerald-500{
+  --tw-text-opacity: 1;
+  color: rgb(16 185 129 / var(--tw-text-opacity));
 }
 
 .opacity-50{
@@ -1354,6 +1368,11 @@ video {
   .md\:py-4{
     padding-top: 1rem;
     padding-bottom: 1rem;
+  }
+
+  .md\:px-12{
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
 
   .md\:text-lg{

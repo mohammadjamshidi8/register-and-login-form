@@ -79,6 +79,21 @@ let forgotPasswordElem = document.querySelector('#forgot-pass')
 let changePassModal = document.querySelector('#change-pass-modal')
 let changePassModalCloseBtn = document.querySelector('#change-pass-modal-close')
 
+let changePasswordEmail = document.querySelector('#change-modal-email')
+
+let modalExistUserMassege = document.querySelector('#change-modal-email-check')
+
+let isEmailCorrect = false
+let isPasswordCorrect = false
+
+let userNewPassword = document.querySelector('#change-modal-pass')
+let modalPasswordCheck = document.querySelector('#new-pass-modal')
+let submitChanges = document.querySelector('#submit-change-password')
+
+let findUser = null
+
+let succefulyText = document.querySelector('#succefuly-massege')
+
 // -------------  import supabase client ------------- //
 
 // Create a single supabase client for interacting with your database
@@ -645,6 +660,8 @@ formLoginBtn.addEventListener('click', (e) => {
 
 })
 
+// show and hide change password modal with clicking
+
 forgotPasswordElem.addEventListener('click', () => {
 
     changePassModal.classList.remove('hidden')
@@ -659,5 +676,145 @@ changePassModalCloseBtn.addEventListener('click', () => {
     changePassModal.classList.add('hidden')
 
     mainContainer.classList.remove('blur-md')
+
+})
+
+
+// checking for email exist in database
+
+changePasswordEmail.addEventListener('blur', (e) => {
+
+    let userEmailChange = e.target.value
+
+    async function reviewData() {
+
+        const { data, error } = await supabase
+            .from('users_info')
+            .select()
+
+        console.log(data);
+
+        let userWantChange = data.filter(user => {
+            return user.email === userEmailChange
+        })
+
+        if (userWantChange.length) {
+
+            modalExistUserMassege.classList.remove('hidden')
+
+            modalExistUserMassege.innerHTML = 'your email is correct'
+
+            modalExistUserMassege.classList.add('text-emerald-500')
+
+            modalExistUserMassege.classList.remove('text-danger')
+
+            isEmailCorrect = true
+            findUser = userWantChange
+
+        } else {
+
+            modalExistUserMassege.classList.remove('hidden')
+
+            modalExistUserMassege.innerHTML = `There is no user with this email`
+            modalExistUserMassege.classList.remove('text-emerald-500')
+
+            modalExistUserMassege.classList.add('text-danger')
+
+            isEmailCorrect = false
+            findUser = null
+        }
+
+    }
+
+    reviewData()
+
+})
+
+userNewPassword.addEventListener('input', (e) => {
+
+    let newPassword = e.target.value
+
+    if (newPassword.length > 4) {
+
+        modalPasswordCheck.classList.remove('hidden')
+
+        modalPasswordCheck.innerHTML = 'is more than 4 digits'
+
+        modalPasswordCheck.classList.add('text-emerald-500')
+
+        modalPasswordCheck.classList.remove('text-danger')
+
+        isPasswordCorrect = true
+
+    } else {
+
+        modalPasswordCheck.classList.remove('hidden')
+
+        modalPasswordCheck.innerHTML = `must be more than 4 digit`
+        modalPasswordCheck.classList.remove('text-emerald-500')
+
+        modalPasswordCheck.classList.add('text-danger')
+
+        isPasswordCorrect = false
+
+    }
+
+
+})
+
+submitChanges.addEventListener('click', () => {
+
+    let userPass = userNewPassword.value
+
+    async function changePassword() {
+
+        const { error } = await supabase
+            .from('users_info')
+            .update({ 'password': userPass })
+            .eq('email', changePasswordEmail.value)
+
+        if (!error) {
+
+            changePassModal.classList.add('hidden')
+
+            mainContainer.classList.remove('blur-md')
+
+            resaulModal.classList.remove('hidden')
+
+            succefulyText.innerHTML = 'your password Changed :)'
+
+            setTimeout(() => {
+                resaulModal.classList.add('hidden')
+
+            }, 4000);
+
+
+        } else {
+
+            console.log('nothing');
+
+        }
+
+    }
+
+    if (isEmailCorrect && isPasswordCorrect) {
+
+        changePassword()
+
+    } else {
+
+        changePassModal.classList.add('hidden')
+
+        mainContainer.classList.remove('blur-md')
+
+        // dontHaveAccountModal.classList.remove('hidden')
+
+        // dontHaveAccountMassege.innerHTML = 'please fill inputs correctly.'
+
+
+        // setTimeout(() => {
+        //     dontHaveAccountModal.classList.add('hidden')
+        // }, 4000);
+    }
 
 })

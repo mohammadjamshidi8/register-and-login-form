@@ -14,108 +14,110 @@
   </head>
 
   <body class="light">
+    <!-- modal for change password start -->
 
-        <!-- modal for change password start -->
-
-        <div id="change-pass-modal"
-        class="absolute z-50 w-11/12 md:w-1/4 top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 bg-white px-5 py-10 rounded-md flex flex-col gap-y-6 dark:bg-slate-900 dark:border-2 dark:border-emerald-500 hidden"
+    <div
+      id="change-pass-modal"
+      class="absolute z-50 w-11/12 md:w-1/4 top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 bg-white px-5 py-10 rounded-md flex flex-col gap-y-6 dark:bg-slate-900 dark:border-2 dark:border-emerald-500 hidden"
+    >
+      <!-- close button start -->
+      <div
+        class="flex justify-center items-center w-full"
+        id="change-pass-modal-close"
       >
-        <!-- close button start -->
-        <div class="flex justify-center items-center w-full" id="change-pass-modal-close">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="3"
-            stroke="currentColor"
-            class="w-10 h-10 text-danger dark:text-white transition duration-200 p-2 hover:w-12
-            hover:h-12 border-2 border-darkBlue rounded-full dark:border-emerald-500 cursor-pointer"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18 18 6M6 6l12 12"
-            />
-          </svg>
-        </div>
-        <!-- close button ends -->
-
-        <div class="w-full flex justify-center relative">
-          <input
-            type="email"
-            name="sign-in-email"
-            id="change-modal-email"
-            placeholder="Enter your Email"
-            class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none dark:bg-white bg-sky-100 focus:shadow-lg transition duration-300 placeholder:capitalize text-sm md:text-md"
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="3"
+          stroke="currentColor"
+          class="w-10 h-10 text-danger dark:text-white transition duration-200 p-2 hover:w-12 hover:h-12 border-2 border-darkBlue rounded-full dark:border-emerald-500 cursor-pointer"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18 18 6M6 6l12 12"
           />
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="absolute top-1/2 -translate-y-1/2 right-3 w-[30px] h-[30px]"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"
-            />
-          </svg>
-        </div>
-        <!-- modal email checking start -->
-        <div class="text-xs -mt-3 text-danger dark:text-white dark:font-bold">
-          <span class="capitalize">your email is correcr</span>
-        </div>
-        <!-- modal email checking ends -->
-
-        <div class="w-full flex justify-center relative">
-          <input
-            type="password"
-            placeholder="enter your new password"
-            id="change-modal-pass"
-            class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none dark:bg-white bg-sky-100 focus:shadow-lg transition duration-300 placeholder:capitalize"
-          />
-
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="absolute top-1/2 -translate-y-1/2 right-3 w-[30px] h-[30px]"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
-            />
-          </svg>
-        </div>
-
-        <!-- modal password checking start -->
-        <div class="text-xs -mt-3 text-danger dark:text-white dark:font-bold">
-          <span class="capitalize">your email is correcr</span>
-        </div>
-        <!-- modal password checking ends -->
-
-        <div>
-          <button
-            class="capitalize bg-primary w-full py-3 rounded-md text-white font-bold dark:bg-emerald-500 dark:text-darkBlue hover:bg-blue-700 transition duration-200 dark:hover:bg-emerald-400"
-            type="submit"
-          >
-            change password
-          </button>
-        </div>
+        </svg>
       </div>
+      <!-- close button ends -->
+
+      <div class="w-full flex justify-center relative">
+        <input
+          type="email"
+          name="sign-in-email"
+          id="change-modal-email"
+          placeholder="Enter your Email"
+          class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none dark:bg-white bg-sky-100 focus:shadow-lg transition duration-300 placeholder:capitalize text-sm md:text-md"
+        />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="absolute top-1/2 -translate-y-1/2 right-3 w-[30px] h-[30px]"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"
+          />
+        </svg>
+      </div>
+      <!-- modal email checking start -->
+
+      <span
+        id="change-modal-email-check"
+        class="capitalize text-xs -mt-3 text-emerald-500 dark:text-white font-bold hidden"
+        ></span
+      >
+
+      <!-- modal email checking ends -->
+
+      <div class="w-full flex justify-center relative">
+        <input
+          type="password"
+          placeholder="enter your new password"
+          id="change-modal-pass"
+          class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none dark:bg-white bg-sky-100 focus:shadow-lg transition duration-300 placeholder:capitalize"
+        />
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="absolute top-1/2 -translate-y-1/2 right-3 w-[30px] h-[30px]"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+          />
+        </svg>
+      </div>
+
+      <!-- modal password checking start -->
+        <span id="new-pass-modal" class="capitalize text-xs -mt-3 text-emerald-500 dark:text-white font-bold"></span>
+      <!-- modal password checking ends -->
+
+      <div>
+        <button id="submit-change-password"
+          class="capitalize bg-primary w-full py-3 rounded-md text-white font-bold dark:bg-emerald-500 dark:text-darkBlue hover:bg-blue-700 transition duration-200 dark:hover:bg-emerald-400"
+          type="submit"
+        >
+          change password
+        </button>
+      </div>
+    </div>
 
     <!-- body container start -->
     <section
       id="main-container"
       class="relative w-full min-h-screen flex justify-center items-center dark:bg-slate-900 bg-sky-300 font-ubuntu"
     >
-  
-
       <!-- modal for change password ends -->
 
       <!-- user has account modal start -->
@@ -165,7 +167,7 @@
       <!-- login or register modal massege start -->
       <div
         id="succes-modal"
-        class="absolute z-20 flex flex-col justify-center items-center w-auto top-10 right-1/2 translate-x-1/2 bg-white rounded-md px-12 py-4 text-bold transition duration-500 hidden"
+        class="absolute z-20 flex flex-col justify-center items-center w-auto top-10 right-1/2 translate-x-1/2 bg-white rounded-md md:px-12 px-6 py-4 text-bold transition duration-500 hidden"
       >
         <lord-icon
           class="w-20 h-20"
@@ -175,7 +177,7 @@
           colors="primary:#121331,secondary:#e83a30"
         >
         </lord-icon>
-        <span class="capitalize font-bold">you login succefuly</span>
+        <span id="succefuly-massege" class="capitalize font-bold text-xs text-center">you login succefuly</span>
       </div>
       <!-- login or register modal massege ends -->
 

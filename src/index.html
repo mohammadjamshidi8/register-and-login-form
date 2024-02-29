@@ -13,48 +13,128 @@
     <title>signup/login form</title>
   </head>
 
-
   <body class="light">
     <!-- body container start -->
     <section
       class="relative w-full min-h-screen flex justify-center items-center dark:bg-slate-900 bg-sky-300 font-ubuntu"
     >
-    <div id="modal" class="absolute w-auto top-10 right-1/2 translate-x-1/2 z-10 bg-white rounded-md px-12 py-4 dark:bg-slate-800 dark:text-white text-bold hidden transition duration-500">
-      <span>
-        An account is already registered with <code id="modal-text" class="text-pink-500 dark:text-emerald-500"></code>. Please log in.
-      </span>
-      <div id="modal-close" class="flex justify-center items-center absolute top-1/2 -translate-y-1/2 left-4 bg-danger w-6 h-6 rounded-full cursor-pointer">X</div>
-    </div>
+      <div
+        id="modal"
+        class="absolute w-auto top-10 right-1/2 translate-x-1/2 z-10 bg-white rounded-md px-12 py-4 dark:bg-slate-800 dark:text-white text-bold hidden transition duration-500"
+      >
+        <span>
+          An account is already registered with
+          <code
+            id="modal-text"
+            class="text-pink-500 dark:text-emerald-500"
+          ></code
+          >. Please log in.
+        </span>
+        <div
+          id="modal-close"
+          class="flex justify-center items-center absolute top-1/2 -translate-y-1/2 left-4 bg-danger w-6 h-6 rounded-full cursor-pointer"
+        >
+          X
+        </div>
+      </div>
+
+      <div
+        id="register-modal"
+        class="absolute w-auto top-10 right-1/2 translate-x-1/2 z-10 bg-white rounded-md px-12 py-4 dark:bg-slate-800 dark:text-white text-bold hidden transition duration-500"
+      >
+        <span>
+          You don't have account with this email :
+          <code
+            id="register-modal-text"
+            class="text-pink-500 dark:text-emerald-500"
+          ></code
+          >. please register first:
+        </span>
+        <div
+          id="modal-close"
+          class="flex justify-center items-center absolute top-1/2 -translate-y-1/2 left-4 bg-danger w-6 h-6 rounded-full cursor-pointer"
+        >
+          X
+        </div>
+      </div>
+
+      <!-- login or register modal massege start -->
+      <div id="succes-modal"
+        class="absolute z-20 flex flex-col justify-center items-center w-auto top-10 right-1/2 translate-x-1/2 bg-white rounded-md px-12 py-4 text-bold transition duration-500 hidden"
+      >
+        <lord-icon
+        class="w-20 h-20"
+          src="https://cdn.lordicon.com/jjoolpwc.json"
+          trigger="loop"
+          delay="1000"
+          colors="primary:#121331,secondary:#e83a30"
+        >
+        </lord-icon>
+        <span class="capitalize font-bold">you login succefuly</span>
+      </div>
+      <!-- login or register modal massege ends -->
+
       <!-- container with gradient start -->
       <div
-        class="max-w-auto md:mx-6 py-10 h-full flex flex-col items-center pb-24 gap-y-12 md:h-auto shadow-md dark:bg-darkBlue bg-[rgba(255,255,255,.2)]  dark:border-emerald-300 md:border-[2px] rounded-lg p-5"
+        class="max-w-auto md:mx-6 py-10 h-full flex flex-col items-center pb-24 gap-y-12 md:h-auto shadow-md dark:bg-darkBlue bg-[rgba(255,255,255,.2)] dark:border-emerald-300 md:border-[2px] rounded-lg p-5"
       >
         <!-- navbar section start -->
-        <div class="w-full h-max flex justify-between items-center md:px-14 gap-x-10">
+        <div
+          class="w-full h-max flex justify-between items-center md:px-14 gap-x-10"
+        >
           <div class="flex items-center">
             <span class="text-md md:text-xl font-bold dark:text-white"
-              >Jamshidi<span class="font-bold text-3xl text-primary dark:text-emerald-500"
+              >Jamshidi<span
+                class="font-bold text-3xl text-primary dark:text-emerald-500"
                 >.</span
               ></span
             >
           </div>
           <!-- register and login button start -->
-          <div class="flex justify-between items-center md:gap-x-8 gap-x-2 font-bold">
-            <button id="register-btn" class="md:text-lg text-sm dark:text-white">Register</button>
-            <button id="login-btn"
+          <div
+            class="flex justify-between items-center md:gap-x-8 gap-x-2 font-bold"
+          >
+            <button
+              id="register-btn"
+              class="md:text-lg text-sm dark:text-white"
+            >
+              Register
+            </button>
+            <button
+              id="login-btn"
               class="text-sm md:text-lg md:px-10 md:py-4 py-2 px-6 text-primary dark:text-emerald-500 font-bold transition duration-200 dark:bg-white bg-[rgba(255,255,255,.5)] hover:bg-white shadow-btn rounded-full"
             >
               Login
             </button>
-            <button id="switch-theme" class="w-7 h-7 p-1 border-2 dark:border-emerald-500 flex justify-center items-center rounded-full">
-              <svg id="dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="black" class="w-5 h-5 dark:fill-white">
-                <path fill-rule="evenodd" d="M7.455 2.004a.75.75 0 0 1 .26.77 7 7 0 0 0 9.958 7.967.75.75 0 0 1 1.067.853A8.5 8.5 0 1 1 6.647 1.921a.75.75 0 0 1 .808.083Z" clip-rule="evenodd" />
-              </svg>              
-              
-              <svg id="light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="" class="w-5 h-5 dark:fill-white hidden">
-                <path d="M10 2a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 10 2ZM10 15a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 10 15ZM10 7a3 3 0 1 0 0 6 3 3 0 0 0 0-6ZM15.657 5.404a.75.75 0 1 0-1.06-1.06l-1.061 1.06a.75.75 0 0 0 1.06 1.06l1.06-1.06ZM6.464 14.596a.75.75 0 1 0-1.06-1.06l-1.06 1.06a.75.75 0 0 0 1.06 1.06l1.06-1.06ZM18 10a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 18 10ZM5 10a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 5 10ZM14.596 15.657a.75.75 0 0 0 1.06-1.06l-1.06-1.061a.75.75 0 1 0-1.06 1.06l1.06 1.06ZM5.404 6.464a.75.75 0 0 0 1.06-1.06l-1.06-1.06a.75.75 0 1 0-1.061 1.06l1.06 1.06Z" />
+            <button
+              id="switch-theme"
+              class="w-7 h-7 p-1 border-2 dark:border-emerald-500 flex justify-center items-center rounded-full"
+            >
+              <svg
+                id="dark"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="black"
+                class="w-5 h-5 dark:fill-white"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M7.455 2.004a.75.75 0 0 1 .26.77 7 7 0 0 0 9.958 7.967.75.75 0 0 1 1.067.853A8.5 8.5 0 1 1 6.647 1.921a.75.75 0 0 1 .808.083Z"
+                  clip-rule="evenodd"
+                />
               </svg>
-              
+
+              <svg
+                id="light"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill=""
+                class="w-5 h-5 dark:fill-white hidden"
+              >
+                <path
+                  d="M10 2a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 10 2ZM10 15a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 10 15ZM10 7a3 3 0 1 0 0 6 3 3 0 0 0 0-6ZM15.657 5.404a.75.75 0 1 0-1.06-1.06l-1.061 1.06a.75.75 0 0 0 1.06 1.06l1.06-1.06ZM6.464 14.596a.75.75 0 1 0-1.06-1.06l-1.06 1.06a.75.75 0 0 0 1.06 1.06l1.06-1.06ZM18 10a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 18 10ZM5 10a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 5 10ZM14.596 15.657a.75.75 0 0 0 1.06-1.06l-1.06-1.061a.75.75 0 1 0-1.06 1.06l1.06 1.06ZM5.404 6.464a.75.75 0 0 0 1.06-1.06l-1.06-1.06a.75.75 0 1 0-1.061 1.06l1.06 1.06Z"
+                />
+              </svg>
             </button>
           </div>
           <!-- register and login button ends -->
@@ -69,10 +149,14 @@
           <div
             class="relative w-1/3 hidden lg:flex flex-col items-start justify-start gap-y-10 mt-10 z-10"
           >
-            <h1 class="text-6xl font-bold dark:text-white">Sign In to Recharge Direct</h1>
+            <h1 class="text-6xl font-bold dark:text-white">
+              Sign In to Recharge Direct
+            </h1>
             <span class="font-bold dark:text-white">
               if you don’t an account you can
-              <a class="text-blue-800 dark:text-emerald-500" href="#">Register here!</a>
+              <a class="text-blue-800 dark:text-emerald-500" href="#"
+                >Register here!</a
+              >
             </span>
             <div
               class="absolute bottom-20 right-16 bg-blue-400 dark:bg-pink-500 w-36 h-36 blur-3xl rounded-full opacity-80"
@@ -95,7 +179,9 @@
           <!-- inputs section start -->
           <div class="md:w-1/2 lg:w-1/3 flex justify-center items-center">
             <!-- sign in form start -->
-            <div id="login-form"
+            <form
+              method=""
+              id="login-form"
               class="w-full md:w-11/12 flex flex-col gap-y-10 items-center hidden"
             >
               <!-- email input start -->
@@ -109,7 +195,6 @@
                 />
                 <lord-icon
                   src="https://cdn.lordicon.com/usownftb.json"
-                  id="sign-in-email-error"
                   data-state="danger"
                   class="absolute top-1/2 -translate-y-1/2 right-3 w-[40px] h-[40px]"
                   trigger=""
@@ -187,37 +272,56 @@
                     id="sign-in-checkbox"
                     class="appearance-none w-3 h-3 bg-white rounded-full checked:bg-primary dark:checked:bg-emerald-500"
                   />
-                  <label for="sign-in-checkbox" class="text-sm font-bold dark:text-white">Remember me</label>
+                  <label id="remember-btn"
+                    for="sign-in-checkbox"
+                    class="text-sm font-bold dark:text-white"
+                    >Remember me</label
+                  >
                 </div>
-                <a class="transition duration-150 hover:text-primary dark:text-white dark:hover:text-emerald-500 text-sm md:font-bold" href="#"
+                <a id="forgot-pass"
+                  class="transition duration-150 hover:text-primary dark:text-white dark:hover:text-emerald-500 text-sm md:font-bold"
+                  href="#"
                   >forgot password?</a
                 >
               </div>
               <!-- remember and forgot password container ends -->
 
+              <span
+                class="text-danger capitalize hidden"
+                  id="sign-in-email-error"
+                >please enter a valid email</span
+              >
+              <span class="text-danger capitalize hidden" id="login-pass-error"
+                >please enter valid password</span
+              >
+
               <!-- sign in button form start -->
               <button
+              id="form-login-btn"
+                type="submit"
                 class="bg-primary dark:bg-emerald-500 w-full py-4 rounded-md shadow-btn text-white dark:text-darkBlue font-bold dark:hover:bg-emerald-400"
               >
                 login
               </button>
               <!-- sign in button form ends -->
-            </div>
+            </form>
             <!-- sign in form ends -->
 
             <!-- sign up form start -->
-            <form method="" id="register-form"
+            <form
+              method=""
+              id="register-form"
               class="w-full md:w-11/12 flex flex-col gap-y-10 items-center"
             >
               <!-- sign up email input start -->
               <div class="w-full flex justify-center relative">
                 <input
                   type="email"
-                  
                   name="sign-up-email"
                   id="sign-up-email"
                   placeholder="Enter Email"
-                  class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none bg-sky-100 focus:shadow-lg dark:bg-white transition duration-300" required
+                  class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none bg-sky-100 focus:shadow-lg dark:bg-white transition duration-300"
+                  required
                 />
                 <lord-icon
                   src="https://cdn.lordicon.com/usownftb.json"
@@ -246,7 +350,8 @@
                   name="full name"
                   id="full-name"
                   placeholder="Enter Your Full Name"
-                  class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none bg-sky-100 focus:shadow-lg dark:bg-white transition duration-300" required
+                  class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none bg-sky-100 focus:shadow-lg dark:bg-white transition duration-300"
+                  required
                 />
                 <lord-icon
                   src="https://cdn.lordicon.com/bgebyztw.json"
@@ -278,7 +383,8 @@
                     minlength="4"
                     maxlength="10"
                     class="w-full py-4 pr-6 pl-12 rounded-md shadow-md placeholder:font-thin font-bold outline-none dark:bg-white bg-sky-100 focus:bg-white] focus:shadow-lg transition duration-300"
-                    placeholder="Enter Password" required
+                    placeholder="Enter Password"
+                    required
                   />
                   <lord-icon
                     src="https://cdn.lordicon.com/vfczflna.json"
@@ -319,16 +425,27 @@
               <!-- sign up password input ends -->
 
               <!-- register error box start -->
-              
-                <span class="text-danger capitalize hidden" id="sign-up-email-error">please enter a valid email</span>
-                <span class="text-danger capitalize hidden" id="full-name-error">please enter a valid name</span>
-                <span class="text-danger capitalize hidden" id="register-pass-error">please enter a valid password</span>
-              
+
+              <span
+                class="text-danger capitalize hidden"
+                id="sign-up-email-error"
+                >please enter a valid email</span
+              >
+              <span class="text-danger capitalize hidden" id="full-name-error"
+                >please enter a valid name</span
+              >
+              <span
+                class="text-danger capitalize hidden"
+                id="register-pass-error"
+                >please enter a valid password</span
+              >
+
               <!-- register error box ends -->
 
-
               <!-- sign in button form start -->
-              <button type="submit" id="register-form-btn"
+              <button
+                type="submit"
+                id="register-form-btn"
                 class="bg-primary dark:bg-emerald-500 w-full py-4 rounded-md shadow-btn text-white font-bold dark:text-darkBlue dark:hover:bg-emerald-400"
               >
                 Register

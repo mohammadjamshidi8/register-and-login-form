@@ -48,6 +48,7 @@ let switchToLight = document.querySelector('#light')
 let switchToDark = document.querySelector('#dark')
 
 let formRegisterBtn = document.querySelector('#register-form-btn')
+let formLoginBtn = document.querySelector('#form-login-btn')
 
 
 let userEmail = null
@@ -63,6 +64,17 @@ let errorNameMassege = document.querySelector('#full-name-error')
 let errorPasswordMassege = document.querySelector('#register-pass-error')
 let errorMassegeClass = 'text-danger capitalize'
 
+
+let resaulModal = document.querySelector('#succes-modal')
+
+let loginErrorMassegeEmail = document.querySelector('#sign-in-email-error')
+let loginErrorPasswordMassege = document.querySelector('#login-pass-error')
+
+let dontHaveAccountModal = document.querySelector('#register-modal')
+let dontHaveAccountMassege = document.querySelector('#register-modal-text')
+
+let rememberCheckBox = document.querySelector('#sign-in-checkbox')
+let forgotPasswordElem = document.querySelector('#forgot-pass')
 
 // -------------  import supabase client ------------- //
 
@@ -119,8 +131,6 @@ const changeBorderColor = (condition, event) => {
 
     let test = document.querySelector(`#${event.target.id}-error`)
 
-    console.log(test);
-
 
     // console.log(`#${event.target.id}-error`);
 
@@ -139,7 +149,7 @@ const changeBorderColor = (condition, event) => {
 
         let errorMassegElem = document.querySelector(`#${event.target.id}-error`)
 
-        console.log(errorMassegElem);
+        console.log('test: ', errorMassegElem);
 
         if (errorMassegElem.getAttribute('class') === errorMassegeClass) {
             errorMassegElem.classList.add('hidden')
@@ -168,7 +178,6 @@ loginEmail.addEventListener('input', (e) => {
 
     changeBorderColor(isEmailValid, e)
 
-    console.log(isEmailValid);
 
 })
 // -------------  animate error icon in login pgae on focus event ------------- //
@@ -239,6 +248,11 @@ loginPassword.addEventListener('input', (e) => {
     if (e.target.value.length > 4) {
         passwordText.style.color = '#055902'
 
+        console.log(loginErrorPasswordMassege);
+
+        if (loginErrorPasswordMassege.getAttribute('class') === errorMassegeClass) {
+            loginErrorPasswordMassege.classList.add('hidden')
+        }
 
     } else {
         passwordText.style.removeProperty('color')
@@ -387,7 +401,7 @@ registerPassword.addEventListener('input', (e) => {
         if (errorPasswordMassege.getAttribute('class') === errorMassegeClass) {
             errorPasswordMassege.classList.add('hidden')
         }
-        
+
 
     } else {
         registerPassText.style.removeProperty('color')
@@ -500,6 +514,12 @@ formRegisterBtn.addEventListener('click', (e) => {
 
                 insertDataToSupabase(userName, userEmail, userPassword)
 
+                resaulModal.classList.remove('hidden')
+
+                setTimeout(() => {
+                    resaulModal.classList.add('hidden')
+                }, 4000);
+
             }
 
         }
@@ -514,10 +534,110 @@ formRegisterBtn.addEventListener('click', (e) => {
         registerEmail.focus()
 
 
-
-
-
     } else {
         console.log('check all fields');
     }
+})
+
+
+// get data from database for login user
+
+formLoginBtn.addEventListener('click', (e) => {
+
+    e.preventDefault()
+
+    if (loginEmail.ariaLabel === 'true') {
+
+        userEmail = loginEmail.value
+
+    } else {
+
+        loginErrorMassegeEmail.classList.remove('hidden')
+
+    }
+
+    if (loginPassword.value.length > 4) {
+
+        userPassword = loginPassword.value
+
+        console.log(typeof userPassword);
+
+    } else {
+
+        loginErrorPasswordMassege.classList.remove('hidden')
+
+    }
+
+    if (userEmail && userPassword) {
+
+
+        async function getData() {
+            const { data, error } = await supabase
+                .from('users_info')
+                .select()
+
+            // find data with same email and password
+            let userInDatabase = data.filter(user => {
+                if (user.email === userEmail && (user.password).toString() === (userPassword).toString()) {
+                    return user;
+                }
+            })
+
+            // find forgot password user
+
+            let userForgotPass = data.filter(user => {
+                if (user.email === userEmail && (user.password).toString() !== (userPassword).toString()) {
+                    return user;
+                }
+            })
+
+
+            // if finding method have value then show login massege
+            if (userInDatabase.length) {
+
+                resaulModal.classList.remove('hidden')
+
+                setTimeout(() => {
+
+                    resaulModal.classList.add('hidden')
+
+                }, 4000);
+
+            } else {
+
+                dontHaveAccountModal.classList.remove('hidden')
+
+                dontHaveAccountMassege.innerHTML = userEmail
+
+                setTimeout(() => {
+                    dontHaveAccountModal.classList.add('hidden')
+                }, 4000);
+
+
+            }
+
+
+
+            // if userForgotPass have value then show forgot pass modal
+
+            if (userForgotPass.length) {
+                dontHaveAccountMassege.innerHTML = userEmail
+
+                dontHaveAccountModal.classList.remove('hidden')
+
+                dontHaveAccountModal.innerHTML = `Your password is incorrect,if you don't remember password ,please click forgot password button:)`
+
+
+            }
+
+        }
+
+        getData()
+
+
+    } else {
+        console.log('false');
+    }
+
+
 })

@@ -93,6 +93,7 @@ let submitChanges = document.querySelector('#submit-change-password')
 let findUser = null
 
 let succefulyText = document.querySelector('#succefuly-massege')
+let fillCorrectlyMassege = document.querySelector('#fill-correctly')
 
 // -------------  import supabase client ------------- //
 
@@ -557,8 +558,7 @@ formRegisterBtn.addEventListener('click', (e) => {
     }
 })
 
-
-// get data from database for login user
+// -------------  get data from database for login user ------------- //
 
 formLoginBtn.addEventListener('click', (e) => {
 
@@ -659,8 +659,7 @@ formLoginBtn.addEventListener('click', (e) => {
 
 
 })
-
-// show and hide change password modal with clicking
+// -------------  show and hide change password modal with clicking ------------- //
 
 forgotPasswordElem.addEventListener('click', () => {
 
@@ -680,7 +679,8 @@ changePassModalCloseBtn.addEventListener('click', () => {
 })
 
 
-// checking for email exist in database
+
+// -------------  checking for email exist in database ------------- //
 
 changePasswordEmail.addEventListener('blur', (e) => {
 
@@ -730,6 +730,8 @@ changePasswordEmail.addEventListener('blur', (e) => {
 
 })
 
+// -------------  check new password and error if the length less than 4 digits ------------- //
+
 userNewPassword.addEventListener('input', (e) => {
 
     let newPassword = e.target.value
@@ -761,6 +763,9 @@ userNewPassword.addEventListener('input', (e) => {
 
 
 })
+
+// -------------  update user password in supabase database ------------- //
+
 
 submitChanges.addEventListener('click', () => {
 
@@ -796,25 +801,20 @@ submitChanges.addEventListener('click', () => {
         }
 
     }
-
+    // change password if email and password valid
     if (isEmailCorrect && isPasswordCorrect) {
 
         changePassword()
 
+    // show error massege if email or password was invalid
+
     } else {
 
-        changePassModal.classList.add('hidden')
+        fillCorrectlyMassege.classList.remove('hidden')
 
-        mainContainer.classList.remove('blur-md')
-
-        // dontHaveAccountModal.classList.remove('hidden')
-
-        // dontHaveAccountMassege.innerHTML = 'please fill inputs correctly.'
-
-
-        // setTimeout(() => {
-        //     dontHaveAccountModal.classList.add('hidden')
-        // }, 4000);
+        setTimeout(() => {
+            fillCorrectlyMassege.classList.add('hidden')
+        }, 4000);
     }
 
 })

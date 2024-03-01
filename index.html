@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/output.css" />
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-straight/css/uicons-regular-straight.css"
+    />
+    <title>signup/login form</title>
+  </head>
+
+  <body class="light">
+    <!-- modal for change password start -->
+
+    <span id="fill-correctly" class="text-pink-500 bg-white p-3 hidden rounded-md absolute z-50 top-10 right-1/2 translate-x-1/2 font-bold tracking-widest">Please fill all inputs correctly!!!</span>
+
+    <div
+      id="change-pass-modal"
+      class="absolute z-50 w-11/12 md:w-1/4 top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 bg-white px-5 py-10 rounded-md flex flex-col gap-y-6 dark:bg-slate-900 dark:border-2 dark:border-emerald-500 hidden"
+    >
+      <!-- close button start -->
+      <div
+        class="flex justify-center items-center w-full"
+        id="change-pass-modal-close"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="3"
+          stroke="currentColor"
+          class="w-10 h-10 text-danger dark:text-white transition duration-200 p-2 hover:w-12 hover:h-12 border-2 border-darkBlue rounded-full dark:border-emerald-500 cursor-pointer"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18 18 6M6 6l12 12"
+          />
+        </svg>
+      </div>
+      <!-- close button ends -->
+
+      <div class="w-full flex justify-center relative">
+        <input
+          type="email"
+          name="sign-in-email"
+          id="change-modal-email"
+          placeholder="Enter your Email"
+          class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none dark:bg-white bg-sky-100 focus:shadow-lg transition duration-300 placeholder:capitalize text-sm md:text-md"
+        />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="absolute top-1/2 -translate-y-1/2 right-3 w-[30px] h-[30px]"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"
+          />
+        </svg>
+      </div>
+      <!-- modal email checking start -->
+
+      <span
+        id="change-modal-email-check"
+        class="capitalize text-xs -mt-3 text-emerald-500 dark:text-white font-bold hidden"
+        ></span
+      >
+
+      <!-- modal email checking ends -->
+
+      <div class="w-full flex justify-center relative">
+        <input
+          type="password"
+          placeholder="enter your new password"
+          id="change-modal-pass"
+          class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none dark:bg-white bg-sky-100 focus:shadow-lg transition duration-300 placeholder:capitalize"
+        />
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="absolute top-1/2 -translate-y-1/2 right-3 w-[30px] h-[30px]"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+          />
+        </svg>
+      </div>
+
+      <!-- modal password checking start -->
+        <span id="new-pass-modal" class="capitalize text-xs -mt-3 text-emerald-500 dark:text-white font-bold"></span>
+      <!-- modal password checking ends -->
+
+      <div>
+        <button id="submit-change-password"
+          class="capitalize bg-primary w-full py-3 rounded-md text-white font-bold dark:bg-emerald-500 dark:text-darkBlue hover:bg-blue-700 transition duration-200 dark:hover:bg-emerald-400"
+          type="submit"
+        >
+          change password
+        </button>
+      </div>
+    </div>
+
+    <!-- body container start -->
+    <section
+      id="main-container"
+      class="relative w-full min-h-screen flex justify-center items-center dark:bg-slate-900 bg-sky-300 font-ubuntu"
+    >
+      <!-- modal for change password ends -->
+
+      <!-- user has account modal start -->
+      <div
+        id="modal"
+        class="absolute w-auto top-10 right-1/2 translate-x-1/2 z-10 bg-white rounded-md px-12 py-4 dark:bg-slate-800 dark:text-white text-bold hidden transition duration-500"
+      >
+        <span>
+          An account is already registered with
+          <code
+            id="modal-text"
+            class="text-pink-500 dark:text-emerald-500"
+          ></code
+          >. Please log in.
+        </span>
+        <div
+          id="modal-close"
+          class="flex justify-center items-center absolute top-1/2 -translate-y-1/2 left-4 bg-danger w-6 h-6 rounded-full cursor-pointer"
+        >
+          X
+        </div>
+      </div>
+      <!-- user has account modal ends -->
+
+      <!-- user don't have account modal start -->
+      <div
+        id="register-modal"
+        class="absolute w-auto top-10 right-1/2 translate-x-1/2 z-10 bg-white rounded-md px-12 py-4 dark:bg-slate-800 dark:text-white text-bold hidden transition duration-500"
+      >
+        <span>
+          You don't have account with this email :
+          <code
+            class="text-pink-500 dark:text-emerald-500"
+          ></code
+          >. please register first:
+        </span>
+        <div
+          id="modal-close"
+          class="flex justify-center items-center absolute top-1/2 -translate-y-1/2 left-4 bg-danger w-6 h-6 rounded-full cursor-pointer"
+        >
+          X
+        </div>
+      </div>
+      <!-- user don't have account modal ends -->
+
+
+      <!-- login or register modal massege start -->
+      <div
+        id="succes-modal"
+        class="absolute z-20 flex flex-col justify-center items-center w-auto top-10 right-1/2 translate-x-1/2 bg-white rounded-md md:px-12 px-6 py-4 text-bold transition duration-500 hidden"
+      >
+        <lord-icon
+          class="w-20 h-20"
+          src="https://cdn.lordicon.com/jjoolpwc.json"
+          trigger="loop"
+          delay="1000"
+          colors="primary:#121331,secondary:#e83a30"
+        >
+        </lord-icon>
+        <span id="succefuly-massege" class="capitalize font-bold text-xs text-center">you login succefuly</span>
+      </div>
+      <!-- login or register modal massege ends -->
+
+      <!-- container with gradient start -->
+      <div
+        class="max-w-auto md:mx-6 py-10 h-full flex flex-col items-center pb-24 gap-y-12 md:h-auto shadow-md dark:bg-darkBlue bg-[rgba(255,255,255,.2)] dark:border-emerald-300 md:border-[2px] rounded-lg p-5"
+      >
+        <!-- navbar section start -->
+        <div
+          class="w-full h-max flex justify-between items-center md:px-14 gap-x-10"
+        >
+          <div class="flex items-center">
+            <span class="text-md md:text-xl font-bold dark:text-white"
+              >Jamshidi<span
+                class="font-bold text-3xl text-primary dark:text-emerald-500"
+                >.</span
+              ></span
+            >
+          </div>
+          <!-- register and login button start -->
+          <div
+            class="flex justify-between items-center md:gap-x-8 gap-x-2 font-bold"
+          >
+            <button
+              id="register-btn"
+              class="md:text-lg text-sm dark:text-white"
+            >
+              Register
+            </button>
+            <button
+              id="login-btn"
+              class="text-sm md:text-lg md:px-10 md:py-4 py-2 px-6 text-primary dark:text-emerald-500 font-bold transition duration-200 dark:bg-white bg-[rgba(255,255,255,.5)] hover:bg-white shadow-btn rounded-full"
+            >
+              Login
+            </button>
+            <button
+              id="switch-theme"
+              class="w-7 h-7 p-1 border-2 dark:border-emerald-500 flex justify-center items-center rounded-full"
+            >
+              <svg
+                id="dark"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="black"
+                class="w-5 h-5 dark:fill-white"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M7.455 2.004a.75.75 0 0 1 .26.77 7 7 0 0 0 9.958 7.967.75.75 0 0 1 1.067.853A8.5 8.5 0 1 1 6.647 1.921a.75.75 0 0 1 .808.083Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+
+              <svg
+                id="light"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill=""
+                class="w-5 h-5 dark:fill-white hidden"
+              >
+                <path
+                  d="M10 2a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 10 2ZM10 15a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 10 15ZM10 7a3 3 0 1 0 0 6 3 3 0 0 0 0-6ZM15.657 5.404a.75.75 0 1 0-1.06-1.06l-1.061 1.06a.75.75 0 0 0 1.06 1.06l1.06-1.06ZM6.464 14.596a.75.75 0 1 0-1.06-1.06l-1.06 1.06a.75.75 0 0 0 1.06 1.06l1.06-1.06ZM18 10a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 18 10ZM5 10a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 5 10ZM14.596 15.657a.75.75 0 0 0 1.06-1.06l-1.06-1.061a.75.75 0 1 0-1.06 1.06l1.06 1.06ZM5.404 6.464a.75.75 0 0 0 1.06-1.06l-1.06-1.06a.75.75 0 1 0-1.061 1.06l1.06 1.06Z"
+                />
+              </svg>
+            </button>
+          </div>
+          <!-- register and login button ends -->
+        </div>
+        <!-- navbar section ends -->
+
+        <!-- content form section start -->
+        <div
+          class="w-full mt-10 flex gap-x-5 gap-y-10 md:px-10 flex-col md:flex-row justify-between"
+        >
+          <!-- text and color circle section start -->
+          <div
+            class="relative w-1/3 hidden lg:flex flex-col items-start justify-start gap-y-10 mt-10 z-10"
+          >
+            <h1 class="text-6xl font-bold dark:text-white">
+              Sign In to Recharge Direct
+            </h1>
+            <span class="font-bold dark:text-white">
+              if you don’t an account you can
+              <a class="text-blue-800 dark:text-emerald-500" href="#"
+                >Register here!</a
+              >
+            </span>
+            <div
+              class="absolute bottom-20 right-16 bg-blue-400 dark:bg-pink-500 w-36 h-36 blur-3xl rounded-full opacity-80"
+            ></div>
+            <div
+              class="absolute top-0 left-16 bg-yellow-200 dark:bg-orange-400 w-36 h-36 blur-3xl rounded-full opacity-50 -z-10"
+            ></div>
+            <div
+              class="absolute bottom-12 left-16 bg-emerald-400 w-36 h-36 blur-3xl rounded-full opacity-50"
+            ></div>
+          </div>
+          <!-- text and color circle section ends -->
+
+          <!-- hero image start -->
+          <div class="md:w-1/2 lg:w-1/3 flex justify-center items-center">
+            <img src="../images/Picture.png" alt="" />
+          </div>
+          <!-- hero image ends -->
+
+          <!-- inputs section start -->
+          <div class="md:w-1/2 lg:w-1/3 flex justify-center items-center">
+            <!-- sign in form start -->
+            <form
+              method=""
+              id="login-form"
+              class="w-full md:w-11/12 flex flex-col gap-y-10 items-center hidden"
+            >
+              <!-- email input start -->
+              <div class="w-full flex justify-center relative">
+                <input
+                  type="email"
+                  name="sign-in-email"
+                  id="sign-in-email"
+                  placeholder="Enter Email"
+                  class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none dark:bg-white bg-sky-100 focus:shadow-lg transition duration-300"
+                />
+                <lord-icon
+                  src="https://cdn.lordicon.com/usownftb.json"
+                  data-state="danger"
+                  class="absolute top-1/2 -translate-y-1/2 right-3 w-[40px] h-[40px]"
+                  trigger=""
+                  colors="primary:#acadac,secondary:#f24444"
+                >
+                </lord-icon>
+                <lord-icon
+                  src="https://cdn.lordicon.com/cgzlioyf.json"
+                  trigger=""
+                  data-state="succes"
+                  id="sign-in-email-succes"
+                  class="absolute top-1/2 -translate-y-1/2 right-3 w-[40px] h-[40px] hidden"
+                  colors="primary:#16c72e"
+                >
+                </lord-icon>
+              </div>
+              <!-- email input ends -->
+
+              <!-- password input starts -->
+              <div class="w-full flex flex-col gap-y-3 justify-center">
+                <div class="w-full flex justify-center relative">
+                  <input
+                    type="password"
+                    name="sign-in-pass"
+                    id="sign-in-pass"
+                    minlength="4"
+                    maxlength="10"
+                    class="w-full py-4 pr-6 pl-12 rounded-md shadow-md placeholder:font-thin font-bold outline-none dark:bg-white bg-sky-100 focus:bg-white] focus:shadow-lg transition duration-300"
+                    placeholder="Enter Password"
+                  />
+                  <lord-icon
+                    src="https://cdn.lordicon.com/vfczflna.json"
+                    trigger=""
+                    data-state="succes"
+                    id="login-eye"
+                    stroke="bold"
+                    class="absolute top-1/2 -translate-y-1/2 right-3 w-[30px] h-[30px] cursor-pointer hidden"
+                    colors="primary:#acacac,secondary:#000"
+                  >
+                  </lord-icon>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/khheayfj.json"
+                    trigger=""
+                    id="login-lock"
+                    data-state="danger"
+                    class="absolute top-1/2 -translate-y-1/2 right-3 w-[30px] h-[30px] cursor-pointer"
+                    stroke="bold"
+                    colors="primary:#121331,secondary:#acacac"
+                  >
+                  </lord-icon>
+                  <!-- counter start -->
+                  <div
+                    class="absolute top-1/2 -translate-y-1/2 left-3 pr-2 border-r-2 border-black"
+                  >
+                    <span id="counter" class="text-slate-500">10</span>
+                  </div>
+                  <!-- counter ends -->
+                </div>
+                <!-- password error text start -->
+                <span
+                  id="password-text"
+                  class="transition duration-200 text-xs text-danger darlk:text-rose-500 hidden"
+                  >password must between 4 and 10 digits</span
+                >
+                <!-- password error text ends -->
+              </div>
+              <!-- password input ends -->
+
+              <!-- remember and forgot password container start -->
+              <div class="w-full flex justify-between font-bold">
+                <div class="flex gap-x-2 items-center">
+                  <input
+                    type="checkbox"
+                    name="sign-in-checkbox"
+                    id="sign-in-checkbox"
+                    class="appearance-none w-3 h-3 bg-white rounded-full checked:bg-primary dark:checked:bg-emerald-500"
+                  />
+                  <label
+                    id="remember-btn"
+                    for="sign-in-checkbox"
+                    class="text-sm font-bold dark:text-white"
+                    >Remember me</label
+                  >
+                </div>
+                <a
+                  id="forgot-pass"
+                  class="transition duration-150 hover:text-primary dark:text-white dark:hover:text-emerald-500 text-sm md:font-bold"
+                  href="#"
+                  >forgot password?</a
+                >
+              </div>
+              <!-- remember and forgot password container ends -->
+
+              <span
+                class="text-danger capitalize hidden"
+                id="sign-in-email-error"
+                >please enter a valid email</span
+              >
+              <span class="text-danger capitalize hidden" id="login-pass-error"
+                >please enter valid password</span
+              >
+
+              <!-- sign in button form start -->
+              <button
+                id="form-login-btn"
+                type="submit"
+                class="bg-primary dark:bg-emerald-500 w-full py-4 rounded-md shadow-btn text-white dark:text-darkBlue font-bold dark:hover:bg-emerald-400"
+              >
+                login
+              </button>
+              <!-- sign in button form ends -->
+            </form>
+            <!-- sign in form ends -->
+
+            <!-- sign up form start -->
+            <form
+              method=""
+              id="register-form"
+              class="w-full md:w-11/12 flex flex-col gap-y-10 items-center"
+            >
+              <!-- sign up email input start -->
+              <div class="w-full flex justify-center relative">
+                <input
+                  type="email"
+                  name="sign-up-email"
+                  id="sign-up-email"
+                  placeholder="Enter Email"
+                  class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none bg-sky-100 focus:shadow-lg dark:bg-white transition duration-300"
+                  required
+                />
+                <lord-icon
+                  src="https://cdn.lordicon.com/usownftb.json"
+                  data-state="danger"
+                  class="absolute top-1/2 -translate-y-1/2 right-3 w-[40px] h-[40px]"
+                  trigger=""
+                  colors="primary:#acadac,secondary:#f24444"
+                >
+                </lord-icon>
+                <lord-icon
+                  src="https://cdn.lordicon.com/cgzlioyf.json"
+                  trigger=""
+                  data-state="succes"
+                  id="sign-up-email-succes"
+                  class="absolute top-1/2 -translate-y-1/2 right-3 w-[40px] h-[40px] hidden"
+                  colors="primary:#16c72e"
+                >
+                </lord-icon>
+              </div>
+              <!-- sign up email input ends -->
+
+              <!-- sign up full name input start -->
+              <div class="w-full flex justify-center relative">
+                <input
+                  type="text"
+                  name="full name"
+                  id="full-name"
+                  placeholder="Enter Your Full Name"
+                  class="w-full py-4 px-6 rounded-md shadow-md placeholder:font-thin font-bold outline-none bg-sky-100 focus:shadow-lg dark:bg-white transition duration-300"
+                  required
+                />
+                <lord-icon
+                  src="https://cdn.lordicon.com/bgebyztw.json"
+                  data-state="danger"
+                  class="absolute top-1/2 -translate-y-1/2 right-3 w-[40px] h-[40px]"
+                  trigger=""
+                  colors="primary:#acadac,secondary:#f24444"
+                >
+                </lord-icon>
+                <lord-icon
+                  src="https://cdn.lordicon.com/cgzlioyf.json"
+                  trigger=""
+                  data-state="succes"
+                  id="full-name-succes"
+                  class="absolute top-1/2 -translate-y-1/2 right-3 w-[40px] h-[40px] hidden"
+                  colors="primary:#16c72e"
+                >
+                </lord-icon>
+              </div>
+              <!-- sign up full name input ends -->
+
+              <!-- sign uo password input starts -->
+              <div class="w-full flex flex-col gap-y-3 justify-center">
+                <div class="w-full flex justify-center relative">
+                  <input
+                    type="password"
+                    name="sign-in-pass"
+                    id="register-pass"
+                    minlength="4"
+                    maxlength="10"
+                    class="w-full py-4 pr-6 pl-12 rounded-md shadow-md placeholder:font-thin font-bold outline-none dark:bg-white bg-sky-100 focus:bg-white] focus:shadow-lg transition duration-300"
+                    placeholder="Enter Password"
+                    required
+                  />
+                  <lord-icon
+                    src="https://cdn.lordicon.com/vfczflna.json"
+                    trigger=""
+                    data-state="succes"
+                    id="register-eye"
+                    stroke="bold"
+                    class="absolute top-1/2 -translate-y-1/2 right-3 w-[30px] h-[30px] cursor-pointer hidden"
+                    colors="primary:#acacac,secondary:#000"
+                  >
+                  </lord-icon>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/khheayfj.json"
+                    trigger=""
+                    id="register-lock"
+                    data-state="danger"
+                    class="absolute top-1/2 -translate-y-1/2 right-3 w-[30px] h-[30px] cursor-pointer"
+                    stroke="bold"
+                    colors="primary:#121331,secondary:#acacac"
+                  >
+                  </lord-icon>
+                  <!-- counter start -->
+                  <div
+                    class="absolute top-1/2 -translate-y-1/2 left-3 pr-2 border-r-2 border-black"
+                  >
+                    <span id="register-counter" class="text-slate-500">10</span>
+                  </div>
+                  <!-- counter ends -->
+                </div>
+                <!-- password error text start -->
+                <span
+                  id="register-password-text"
+                  class="transition duration-200 text-xs text-danger hidden"
+                  >password must between 4 and 10 digits</span
+                >
+                <!-- password error text ends -->
+              </div>
+              <!-- sign up password input ends -->
+
+              <!-- register error box start -->
+
+              <span
+                class="text-danger capitalize hidden"
+                id="sign-up-email-error"
+                >please enter a valid email</span
+              >
+              <span class="text-danger capitalize hidden" id="full-name-error"
+                >please enter a valid name</span
+              >
+              <span
+                class="text-danger capitalize hidden"
+                id="register-pass-error"
+                >please enter a valid password</span
+              >
+
+              <!-- register error box ends -->
+
+              <!-- sign in button form start -->
+              <button
+                type="submit"
+                id="register-form-btn"
+                class="bg-primary dark:bg-emerald-500 w-full py-4 rounded-md shadow-btn text-white font-bold dark:text-darkBlue dark:hover:bg-emerald-400"
+              >
+                Register
+              </button>
+              <!-- sign in button form ends -->
+            </form>
+
+            <!-- sign up form ends -->
+          </div>
+          <!-- inputs section ends -->
+        </div>
+        <!-- content form section ends -->
+      </div>
+      <!-- container with gradient ends -->
+    </section>
+    <!-- body container ends -->
+
+    <script type="module" src="./Js/app.js"></script>
+  </body>
+</html>
